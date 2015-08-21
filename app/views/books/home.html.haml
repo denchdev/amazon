@@ -1,0 +1,27 @@
+.container-fluid  
+  .col-md-10.col-md-offset-1
+    %h1.text-center
+      Welcome to Bookstore!    
+
+    .row    
+      .owl-carousel
+        -@books.each do |book|
+          %div
+            .col-md-3
+              =link_to book do 
+                =image_tag book.image.preview.url.to_s, class: "thumbnail"
+            .col-md-9
+              %h2
+                =link_to book do 
+                  = book.title
+              %h4
+                = book.author.authored 
+              %p= book.short_description  
+              .row 
+                .col-md-7
+                  %h2
+                    .price= number_to_currency(book.price)
+                .col-md-5                  
+                  =form_tag order_item_create_path("#{book.id}"), class: 'form-inline' do
+                    = number_field_tag 'quantity', "1", within: 1...10, class: 'quantity-input'
+                    = submit_tag "ADD TO CART", class: 'btn btn-primary btn-lg' 

@@ -1,0 +1,55 @@
+.container-fluid
+  %h3= t(:orders)
+  %h5
+    %b= t(:in_progres)
+  %hr
+  .row
+    .col-md-4.text-center.border-bottom
+      = t(:th_book)
+    .col-md-1.text-center.border-bottom
+      = t(:th_price)
+    .col-md-1.text-center.border-bottom
+      = t(:th_qty)
+    .col-md-1.text-center.border-bottom
+      = t(:th_total)
+  -@order_items.each do |oi|
+    .row
+      .col-md-4.border-bottom              
+        =link_to oi.book do
+          .col-md-3
+            = image_tag oi.book.image.thumb.url.to_s, class: 'obj-left'
+          .col-md-9
+            %h5= oi.book.title 
+            %h6= oi.book.author.authored           
+      .col-md-1 
+        = number_to_currency oi.book.price
+      .col-md-1
+        = oi.quantity
+      .col-md-1
+        = number_to_currency oi.price
+  %br
+  .row
+    .col-md-5
+      =link_to t(:go_to_cart), order_items_path,  class:'btn btn-info'
+    .col-md-6  
+      %strong= "#{t(:total_price)}: #{number_to_currency(100)}"
+  
+  %br
+  %h5
+    %b= t(:in_process)
+  %hr
+  = render 'orders_table'
+
+  %br
+  %h5
+    %b= t(:in_delivery)
+  %hr
+  = render 'orders_table'
+
+  %br
+  %h5
+    %b= t(:delivered)
+  = render 'orders_table'
+
+  
+

@@ -1,0 +1,17 @@
+.container-fluid
+  .row
+    .col-md-3
+      = t(:number)
+    .col-md-3
+      = t(:completed_at)
+    .col-md-3
+      = t(:total)
+  .row
+    .col-md-3
+      =link_to "#{@order}", @order
+    .col-md-3
+      = number_to_currency(100)
+    .col-md-3
+      =link_to t(:view), ''    
+
+      

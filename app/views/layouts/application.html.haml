@@ -1,0 +1,44 @@
+!!!
+%html
+  %head
+    %title= yield(:title)
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body    
+    .col-md-10.col-md-offset-1
+      %nav.navbar.navbar-default
+        .navbar-header
+          .navbar-brand= link_to "AMAZON", root_path
+        %ul.nav.navbar-nav.navbar-left
+          %li= link_to t(:home), root_path
+          %li= link_to t(:shop), books_path 
+          %li
+            = link_to order_items_path do
+              %span{class: "glyphicon glyphicon-shopping-cart"}
+              %em #{t(:cart)}:
+              -if current_order
+                = current_order.count_item 
+                = "item(s)" 
+                = number_to_currency(current_order.total_price)
+              -else
+                %em (empty)
+                        
+        %ul.nav.navbar-nav.navbar-right
+          -if current_customer 
+            %li= link_to t(:settings), ''
+            %li= link_to t(:orders), orders_path
+            %li= link_to t(:sign_out), destroy_customer_session_path, method: :delete
+          -else  
+            %li= link_to t(:log_in), new_customer_session_path
+            %li= link_to t(:sign_up), new_customer_registration_path            
+      
+      - if flash[:notice]
+        .alert.alert-success.alert-dismissable
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
+          %center= notice
+      - if flash[:alert]
+        .alert.alert-danger.alert-dismissable
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
+          %center= alert
+      = yield    

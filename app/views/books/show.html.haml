@@ -1,0 +1,27 @@
+.container-fluid.book-page-wrap  
+  .row.clearfix
+    .col-md-5
+      =image_tag @book.image.url.to_s, class: "thumbnail"
+    .col-md-6
+      %h2= @book.title
+      %h4= @book.author.authored
+      .clearfix
+        .price= number_to_currency(@book.price)        
+        =form_tag order_item_create_path("#{@book.id}"), class: 'form-inline' do
+          = number_field_tag 'quantity', "1", within: 1...10, class: 'quantity-input', class: ''
+          = submit_tag "ADD TO CART", class: 'btn btn-primary btn-lg'
+      %p= @book.description
+      %div= @book.description
+  
+  .well
+    .text-right
+      =link_to 'Leave a Review', '', class: 'btn btn-success'
+    %hr    
+    -@book.ratings do |rating|
+      .row
+        =rating.title
+        =rating.review
+        
+      
+
+ 

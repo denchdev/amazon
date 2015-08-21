@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @delivery.name
+%p
+  %b Price:
+  = @delivery.price
+
+= link_to 'Edit', edit_delivery_path(@delivery)
+\|
+= link_to 'Back', deliveries_path

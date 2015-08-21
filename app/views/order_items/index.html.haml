@@ -1,0 +1,48 @@
+.container-fluid
+  -if @order_items.empty? 
+    %h2
+      %strong= t(:empty_cart) 
+    =link_to t(:to_shop), books_path, class:'btn btn-success btn-lg'    
+  - else
+    .row
+      .col-md-8.text-center
+        = t(:th_book)
+      .col-md-1.text-center
+        = t(:th_price)
+      .col-md-1.text-center
+        = t(:th_qty)
+      .col-md-1.text-center
+        = t(:th_total)
+    -@order_items.each do |oi|
+      .row
+        .col-md-8              
+          =link_to oi.book do
+            .col-md-2
+              = image_tag oi.book.image.preview.url.to_s, class: 'obj-left'
+            .col-md-10
+              %h5= oi.book.title
+              = oi.book.short_description
+        .col-md-1 
+          = number_to_currency oi.book.price
+        .col-md-1
+          = oi.quantity
+        .col-md-1
+          = number_to_currency oi.price
+        .col-md-1
+          = link_to oi, method: :edit do
+            %span{class: "glyphicon glyphicon-pencil"}
+          |
+          = link_to oi, method: :delete, data: {confirm: t(:are_you_sure)} do
+            %span{class: "glyphicon glyphicon-trash"}
+      %hr              
+    .row
+      .obj-right  
+        %h3    
+          %strong.label.label-primary= "#{t(:total_price)}: #{number_to_currency(current_order.total_price)}"
+    .row
+      =link_to t(:empty_cart), clear_cart_path, data: {confirm: t(:are_you_sure)}, class:'btn btn-warning'
+      =link_to t(:contunie_shoping), books_path, class:'btn btn-info'
+      .obj-right         
+        =link_to t(:checkout), order_steps_path, class:'btn btn-success'
+          
+      

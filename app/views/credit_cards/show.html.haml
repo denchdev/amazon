@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Number:
+  = @credit_card.number
+%p
+  %b Cvv:
+  = @credit_card.CVV
+%p
+  %b Expiration month:
+  = @credit_card.expiration_month
+%p
+  %b Expiration year:
+  = @credit_card.expiration_year
+%p
+  %b Firstname:
+  = @credit_card.firstname
+%p
+  %b Lastname:
+  = @credit_card.lastname
+
+= link_to 'Edit', edit_credit_card_path(@credit_card)
+\|
+= link_to 'Back', credit_cards_path

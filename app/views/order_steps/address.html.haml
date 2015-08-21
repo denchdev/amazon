@@ -1,0 +1,14 @@
+.container-fluid
+  = render layout: 'form' do |f|
+    .col-md-4
+      %h2= t(:bill_ad)
+      .row
+        = fields_for @user do |u|
+          .col-md-8
+            .form-group
+              = u.label :firstname, "First name"
+              = u.text_field :firstname
+            .form-group
+              = u.label :lastname, "Last name"
+              = u.text_field :lastname
+            

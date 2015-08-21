@@ -1,0 +1,75 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require owl.carousel
+ *= require owl.theme 
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.navbar
+{
+  margin-top: 30px;
+}
+
+.navbar-header
+{
+  margin-left: 2%;
+}
+
+.navbar-right
+{
+  margin-right: 2%;
+}
+
+.obj-right
+{
+  float: right;
+}
+
+.obj-left
+{
+  float: left;
+}
+
+img {max-width: 100%;}
+
+.notifications {
+  .alert {margin-bottom:0px;}
+}
+
+.underlined-h2 {border-bottom: 2px solid #ccc; margin-bottom:15px;
+  &.add-margin-bot {margin-bottom: 57px;}
+}
+
+.f_icon 
+{
+  height: 20%; 
+  width: 20%; 
+  display: inline-block; 
+  margin: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
