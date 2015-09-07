@@ -29,7 +29,8 @@ gem 'kaminari'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'owlcarousel-rails'
 gem 'wicked'
-
+gem 'simple_form'
+gem 'country_select'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -51,6 +52,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'faker'
   gem 'database_cleaner'
+  gem 'codeclimate-test-reporter'
 end
 
 group :production do

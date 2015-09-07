@@ -33,7 +33,7 @@ en:
   th_price: "PRICE"
   th_qty: "QTY"
   th_total: "TOTAL"
-  total_price: "Total_price"
+  total_price: "Total price"
   empty_cart: "EMPTY CART"
   contunie shoping: "CONTUNIE SHOPING"
   update: "UPDATE"
@@ -52,6 +52,15 @@ en:
   to_shop: "Go to shop"
   checkout: "CHECKOUT"
   bill_ad: "Billing address"
+  ship_ad: "Shipping address"
+  f_name: "Firstname"
+  l_name: "Lastname"
+  address: "Address"
+  zip: "Zipcode"
+  city: "City"
+  phone: "Phone"
+  country: "Country"
+
   
   
   

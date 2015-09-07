@@ -1,16 +1,35 @@
-= form_for @order, url: wizard_path do |f|
-  - if @order.errors.any?
-    .error_messages
-      %h2
-        = pluralize(@order.errors.count, "error")
-        prohibited this user from being saved:
-      %ul
-        - @order.errors.full_messages.each do |msg|
-          %li= msg
+= simple_form_for @order_form, url: wizard_path, method: :put do |f|
+  = f.error_notification
   %h1
     %b= t(:checkout) 
-  .row  
-    = yield f
+  .row 
+    .col-md-8 
+      = yield f
+    .col-md-3.col-md-offset-1
+      %h3= "R#{@order.created_at.to_i}"
+      .row
+        .col-md-4
+          = t(:th_book)
+        .col-md-3
+          = t(:th_price)
+        .col-md-2
+          = t(:th_qty)
+        .col-md-3
+          = t(:th_total)
+      - @order_items.each do |oi|
+        .row
+          .col-md-4             
+            =link_to oi.book do            
+              = image_tag oi.book.image.thumb.url.to_s
+          .col-md-3
+            = number_to_currency oi.book.price
+          .col-md-2
+            = oi.quantity
+          .col-md-3
+            = number_to_currency oi.price
+      .row
+      %h5 "#{t(:total_price)}: #{number_to_currency(current_order.total_price)}"
+
   .row
     .actions
       = f.submit "Continue"

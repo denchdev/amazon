@@ -3,14 +3,15 @@ class OrderStepsController < ApplicationController
   steps :address, :delivery, :payment, :confirm, :complete
   
   def show
-    @user = current_customer ? current_customer : Customer.new
+    @order_form = OrderForm.new(current_customer)
     @order = current_order
+    @order_items = @order.order_items
     render_wizard
   end
   
   def update
     @order = current_order
-    @order.attributes = params[:order]
+    @order.attributes = params[:order_form]
     render_wizard @order
   end
   

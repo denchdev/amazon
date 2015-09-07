@@ -72,6 +72,8 @@ GEM
     carrierwave-aws (0.7.1)
       aws-sdk (~> 1.58)
       carrierwave (~> 0.7)
+    codeclimate-test-reporter (0.4.8)
+      simplecov (>= 0.7.1, < 1.0.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -80,6 +82,13 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     columnize (0.9.0)
+    countries (1.0.0)
+      currencies (~> 0.4.2)
+      i18n_data (~> 0.7.0)
+    country_select (2.3.0)
+      countries (~> 1.0.0)
+      sort_alphabetical (~> 1.0)
+    currencies (0.4.2)
     database_cleaner (1.4.1)
     debug_inspector (0.0.2)
     devise (3.5.1)
@@ -90,6 +99,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    docile (1.1.5)
     erubis (2.7.0)
     excon (0.45.4)
     execjs (2.5.2)
@@ -220,6 +230,7 @@ GEM
       nokogiri (~> 1.6.0)
       ruby_parser (~> 3.5)
     i18n (0.7.0)
+    i18n_data (0.7.0)
     inflecto (0.0.2)
     ipaddress (0.8.0)
     jbuilder (2.3.1)
@@ -363,6 +374,16 @@ GEM
     sexp_processor (4.6.0)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
+    simple_form (3.1.0)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
+    simplecov (0.10.0)
+      docile (~> 1.1.0)
+      json (~> 1.8)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
+    sort_alphabetical (1.0.2)
+      unicode_utils (>= 1.2.2)
     spring (1.3.6)
     sprockets (3.3.0)
       rack (~> 1.0)
@@ -383,6 +404,7 @@ GEM
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unicode_utils (1.4.0)
     warden (1.2.3)
       rack (>= 1.0)
     web-console (2.2.1)
@@ -407,7 +429,9 @@ DEPENDENCIES
   capybara
   carrierwave
   carrierwave-aws
+  codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
+  country_select
   database_cleaner
   devise
   factory_girl_rails
@@ -433,6 +457,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   shoulda-matchers
+  simple_form
   spring
   therubyracer
   turbolinks
