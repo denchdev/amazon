@@ -1,3 +1,9 @@
-.container-fluid  
+.container-fluid
   = render layout: 'form' do |f|
-    %h1 Delivery
+    .col-md-6
+      %h2= t(:delivery)
+      .row
+        .col-md-10
+          .form-group
+            = f.collection_radio_buttons :delivery, as: :radio_buttons
+          

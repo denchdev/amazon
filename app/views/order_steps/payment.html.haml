@@ -1,0 +1,19 @@
+.container-fluid
+  = render layout: 'form' do |f|
+    .col-md-10
+      %h2= t(:pay)
+      .row
+        .col-md-10
+          .form-group
+            = f.input :number, label: false, placeholder: "#{t(:number)}"
+          .form-group
+            = f.input :CVV, label: false, placeholder: "#{t(:cvv)}"
+          .form-group
+            = f.input :expiration_month, label: false, placeholder: "#{t(:ex_month)}"
+          .form-group
+            = f.input :expiration_year, label: false, placeholder: "#{t(:ex_year)}"          
+          .form-group
+            = f.input :firstname, label: false, placeholder: "#{t(:f_name)}"
+          .form-group
+            = f.input :lastname, label: false, placeholder: "#{t(:l_name)}"
+

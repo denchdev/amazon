@@ -5,8 +5,8 @@ class Order < ActiveRecord::Base
   belongs_to :credit_card, dependent: :destroy
   has_many :order_items, dependent: :destroy
   belongs_to :delivery
-  belongs_to :billing_address,  class_name: "Address", foreign_key: "billing_address_id"
-  belongs_to :shipping_address, class_name: "Address", foreign_key: "shipping_address_id"
+  belongs_to :billing_address,  class_name: "Address"
+  belongs_to :shipping_address, class_name: "Address"
   
   #validates_presence_of :total_price, :state
   #validates_presence_of :completed_date

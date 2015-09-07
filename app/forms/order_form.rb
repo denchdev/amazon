@@ -14,6 +14,8 @@ class OrderForm
 
   delegate :firstname, :lastname, to: :customer
   delegate :address, :zipcode, :city, :phone, :country,  to: :address, prefix: :ship
+  delegate :delivary, to: :delivery
+  delegate :number, :CVV, :expiration_month, :expiration_year, :firstname, :lastname, to: :credit_card
 
   def initialize(customer)
   	@customer = customer ? customer : Customer.new
@@ -24,14 +26,22 @@ class OrderForm
   end
 
   def address
-	@address ||= Address.new
+	  @address ||= Address.new
   end 
 
-  def submit
+  def delivery
+    @delivery ||= Delivery.new
+  end 
+
+  def credit_card
+    @credit_card ||= CreditCard.new
+  end 
+
+  def submit(params)
   	customer.attributes = params.slice(:firstname, :lastname)
-  	address.attributes = params.slice(:address, :zipcode, :city, :phone, :country)
+  	address.attributes = params.slice(:ship_address, :ship_zipcode, :ship_city, :ship_phone, :ship_country)
   	if valid?      
-      customer.save!
+      #customer.save!
       address.save!
       true
     else
@@ -39,10 +49,5 @@ class OrderForm
     end
   end
   	
-  end
-
-
-
-
-
+  
 end

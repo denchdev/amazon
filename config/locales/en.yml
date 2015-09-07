@@ -60,7 +60,14 @@ en:
   city: "City"
   phone: "Phone"
   country: "Country"
-
+  delivery: "Delivery"
+  pay: "Payment"
+  number: "Nunber"
+  cvv: "CVV"
+  ex_month: "Expiration month"
+  ex_year: "Expiration year"
+  complete: "Complete"
+  confirm: "Confirm"
   
   
   

@@ -1,1 +1,8 @@
-%h1 Complete
+.container-fluid
+  = render layout: 'form' do |f|
+    .col-md-10
+      %h2= t(:complete)
+      .row
+        .col-md-10
+          .form-group
+            = f.input :number, label: false, placeholder: "#{t(:number)}"
