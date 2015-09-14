@@ -8,9 +8,9 @@ class OrderForm
     false
   end
 
-  def self.model_name
-    ActiveModel::Name.new(self, nil, "Order")
-  end
+  # def self.model_name
+  #   ActiveModel::Name.new(self, nil, "Order")
+  # end
 
   delegate :firstname, :lastname, to: :customer
   delegate :address, :zipcode, :city, :phone, :country,  to: :address, prefix: :ship
@@ -38,11 +38,13 @@ class OrderForm
   end 
 
   def submit(params)
-  	customer.attributes = params.slice(:firstname, :lastname)
-  	address.attributes = params.slice(:ship_address, :ship_zipcode, :ship_city, :ship_phone, :ship_country)
-  	if valid?      
+  	#customer.attributes = params.slice(:firstname, :lastname)
+  	#address.attributes = params.slice(:ship_address, :ship_zipcode, :ship_city, :ship_phone, :ship_country)
+  	credit_card.attributes = params.slice(:number, :CVV, :expiration_month, :expiration_year, :firstname, :lastname)
+    if valid?      
       #customer.save!
-      address.save!
+      #address.save!
+      credit_card.save!
       true
     else
       false
