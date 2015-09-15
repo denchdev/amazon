@@ -35,6 +35,7 @@ private
 
   def load_order
     @order = current_order
+    @order_items = @order.order_items
     init_addresses
     init_credit_card
   end
@@ -104,6 +105,6 @@ private
   end
 
   def address_params(type)
-    params.require(type).permit(:address, :zip_code, :phone, :city, :country)
+    params.require(:order).permit(billing_address: [:address, :zipcode, :phone, :city, :country])
   end
 end
