@@ -4,20 +4,9 @@
       %h2= t(:bill_ad)
       .row
         .col-md-10
-          .form-group
-            = f.input :firstname, label: false, placeholder: "#{t(:f_name)}"
-          .form-group
-            = f.input :lastname, label: false, placeholder: "#{t(:l_name)}"
-          .form-group
-            = f.input :ship_address, label: false, placeholder: "#{t(:address)}"
-          .form-group
-            = f.input :ship_zipcode, label: false, placeholder: "#{t(:zip)}"
-          .form-group
-            = f.input :ship_city, label: false, placeholder: "#{t(:city)}"
-          .form-group
-            = f.input :ship_phone, label: false, placeholder: "#{t(:phone)}"
-          .form-group
-            = f.input :ship_country, label: false, placeholder: "#{t(:country)}"
+          = f.simple_fields_for :billing_address, @cart.billing_address do |a|
+            = render partial: "address", object: a
+          
     .col-md-6
       %h2= t(:ship_ad)
       .row

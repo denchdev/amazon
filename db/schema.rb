@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150817183819) do
+ActiveRecord::Schema.define(version: 20150914184613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -166,14 +166,18 @@ ActiveRecord::Schema.define(version: 20150817183819) do
     t.string   "state"
     t.integer  "customer_id"
     t.integer  "credit_card_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "delivery_id"
+    t.integer  "billing_address_id"
+    t.integer  "shipping_address_id"
   end
 
+  add_index "orders", ["billing_address_id"], name: "index_orders_on_billing_address_id", using: :btree
   add_index "orders", ["credit_card_id"], name: "index_orders_on_credit_card_id", using: :btree
   add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
   add_index "orders", ["delivery_id"], name: "index_orders_on_delivery_id", using: :btree
+  add_index "orders", ["shipping_address_id"], name: "index_orders_on_shipping_address_id", using: :btree
 
   create_table "ratings", force: :cascade do |t|
     t.string   "rewiev"

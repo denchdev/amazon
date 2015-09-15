@@ -18,7 +18,7 @@ class OrderStepsController < ApplicationController
       when :address
         return render_wizard unless update_addresses
       when :delivery
-        return redirect_to :back, notice: (I18n.t"cart.delivery.check_delivery") unless update_delivery_service
+        return redirect_to :back, notice: (I18n.t"cart.delivery.check_delivery") unless update_delivery
       when :payment
         return render_wizard unless update_credit_card
       when :confirm
@@ -41,7 +41,7 @@ private
 
   def check_order
     jump_to(:address) unless @order.shipping_address and @order.billing_address
-    jump_to(:delivery) unless @order.delivery_service
+    jump_to(:delivery) unless @order.delivery
     jump_to(:payment) unless @order.credit_card
   end
 
@@ -55,20 +55,20 @@ private
   end
 
   def init_delivery
-    @delivery_services = DeliveryService.all
-    @order.delivery_service ||= @delivery_services[0]
+    @delivery = Delivery.all
+    @order.delivery ||= @delivery[0]
   end
 
   def init_credit_card
-    @order.credit_card ||= CreditCard.new(customer: current_customer)
+    @order.credit_card ||= CreditCard.new()
   end
 
-  def update_delivery_service
-    @order.delivery_service = DeliveryService.find_by_id(params[:delivery])
+  def update_delivery
+    @order.delivery = Delivery.find_by_id(params[:delivery])
   end
 
   def update_credit_card
-    @order.credit_card ||= CreditCard.new(customer: current_customer)
+    @order.credit_card ||= CreditCard.new()
     @order.credit_card.update credit_card_params
   end
 
