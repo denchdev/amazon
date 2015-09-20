@@ -3,12 +3,40 @@
     .col-md-6
       %h2= t(:bill_ad)
       .row
-        .col-md-10
-          = f.simple_fields_for :billing_address do |ba|
-            = render partial: "address", object: ba          
+        .col-md-10          
+          = simple_fields_for :billing_address, @order.billing_address do |f|
+            = render partial: "address", object: f          
     .col-md-6
       %h2= t(:ship_ad)
       .row
         .col-md-10
-          = f.simple_fields_for :shipping_address do |sa|
-            = render partial: "address", object: sa
+          = simple_fields_for :shipping_address, @order.shipping_address do |f|
+            .form-group
+              = hidden_field_tag :use_billing_address, compare_address(@order, "yes", "no")
+              .checkbox
+                %label
+                  = check_box_tag "use-billing-address", "", compare_address(@order, true, false), id: "use-billing-address"
+                  = "use_billing_address" 
+            = render partial: "address", object: f
+:javascript
+  var inputs = $("[type='tel']");
+  inputs.each(function(){
+    // Insert new line after label
+    var input = $(this);
+    var label = $("[for='" + input.attr("id") + "']");
+    $(label).after("<br />");
+    // Mark input as phone number
+    $(input).intlTelInput();
+  });
+
+  $("#use-billing-address").change(function() {
+      if(this.checked) {
+        $("#shipping-address").fadeOut();
+        $("#use_billing_address").val("yes");
+      }else{
+        $("#shipping-address").fadeIn();
+        $("#use_billing_address").val("no");
+      }
+  });
+
+

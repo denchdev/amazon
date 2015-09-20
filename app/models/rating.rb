@@ -16,4 +16,24 @@ class Rating < ActiveRecord::Base
   def calculate_book_avg_rating
     book.recalculate_avg_rating!
   end
+
+  default_scope { order(created_at: :desc) }
+
+  scope :pending, -> { where(state: :pending) }
+  scope :approved, -> { where(state: :approved) }
+
+  aasm column: "state" do
+    state :pending, :initial => true
+    state :approved
+    state :rejected    
+
+    event :approve do
+      transition :pending => :approved
+    end
+
+    event :reject do
+      transition [:pending, :approved] => :rejected
+    end
+  end
+
 end

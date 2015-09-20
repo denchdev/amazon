@@ -1,30 +1,28 @@
 class RatingsController < ApplicationController
-  before_action :authenticate_customer!
-  #authorize_resource
-  
-  def create
-    @book = Book.find(params[:book_id])
-    @rating = @book.ratings.new(rating_params)
-    @rating.customer_id = current_customer.id
-    respond_to do |format|
-      if current_customer.did_not_rate?(@book.id)
-        if @rating.save
-          format.html { redirect_to @book, notice: t(:rating_suc_create) }
-          format.json { redirect_to @book, status: :created, location: @rating }
-        else
-          format.html { redirect_to @book, alert: t(:rating_fails_create) }
-          format.json { render json: @rating.errors, status: :unprocessable_entity }
-        end
-      else
-        format.html { redirect_to @book, alert: t(:rated_already) }
-        format.json { render json: @rating.errors, status: :unprocessable_entity }
-      end
-    end
+  before_action :authenticate_user!, only: [:create]
+
+  load_and_authorize_resource :book
+  load_and_authorize_resource :rating, through: :book
+
+  add_breadcrumb (I18n.t"ratings.ratings"), :ratings_path
+
+  def index
+    @ratings = @ratings.approved.page params[:page]
   end
- 
-  private 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def rating_params
-      params.require(:rating).permit(:rating, :text)
+
+  def create
+    rating = current_user.ratings.build(rating_params)
+    rating.book = @book
+    if rating.save
+      redirect_to @book, notice: (I18n.t"ratings.sent_to_review")
+    else
+      redirect_to @book # todo: msg
     end
+
+  end
+
+  private
+  def rating_params
+    params.require(:rating).permit(:review, :number)
+  end
 end

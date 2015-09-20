@@ -4,6 +4,15 @@
       %h2= t(:delivery)
       .row
         .col-md-10
-          .form-group
-            = f.collection_radio_buttons :delivery, as: :radio_buttons
+        - @delivery.each do |d|
+          = radio_button_tag(:delivery, d.id, @order.delivery == d, options={onclick: "calculate_order_price(#{d.price});"})
+          = "#{d.name} + #{number_to_currency d.price}"	    
+	  
+    :javascript
+      function calculate_order_price(shipping_price){
+        var item_total = #{@order.books_price};//todo
+        var total = item_total + shipping_price;
+        $("#shipping").html("$" + shipping_price.toFixed(2));
+        $("#total").html("$" + total.toFixed(2));
+      }
           

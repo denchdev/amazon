@@ -101,10 +101,10 @@ private
   end
 
   def credit_card_params
-    params.require(:credit_card).permit(:number, :CVV, :expiration_month, :expiration_year, :first_name, :last_name)
+    params.require(:credit_card).permit(:number, :CVV, :expiration_month, :expiration_year, :firstname, :lastname)
   end
 
   def address_params(type)
-    params.require(:order).permit(billing_address: [:address, :zipcode, :phone, :city, :country])
+    params.require(type).permit(:address, :zipcode, :phone, :city, :country, :firstname, :lastname)
   end
 end

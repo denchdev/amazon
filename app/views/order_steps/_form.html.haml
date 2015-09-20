@@ -1,10 +1,10 @@
-= simple_form_for @order, url: wizard_path, method: :put do |f|
-  = f.error_notification
+= form_tag wizard_path, method: :put do 
+  / = error_notification
   %h1
     %b= t(:checkout) 
   .row 
     .col-md-8 
-      = yield f
+      = yield
     .col-md-3.col-md-offset-1
       %h3= "R#{@order.created_at.to_i}"
       .row
@@ -32,5 +32,7 @@
 
   .row
     .actions
-      = f.submit "Continue"
+      %button.btn.btn-primary{:type=>"submit"}
+        = t".save_and_continue"
+      / = submit "Continue"
       or #{link_to "skip this step", next_wizard_path}
