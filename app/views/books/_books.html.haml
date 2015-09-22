@@ -1,0 +1,11 @@
+.col-md-9
+  .clearfix
+    -@books.each_slice(3) do |books|
+      .row
+        -books.each do |book|
+          .col-md-4  
+            =link_to(book) do
+              .image-wrap=image_tag book.image.preview.url.to_s
+              =book.title
+            .price= number_to_currency(book.price)
+  .pagination-wrap=paginate @books

@@ -1,28 +1,26 @@
 class RatingsController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
-
-  load_and_authorize_resource :book
-  load_and_authorize_resource :rating, through: :book
-
-  add_breadcrumb (I18n.t"ratings.ratings"), :ratings_path
-
-  def index
-    @ratings = @ratings.approved.page params[:page]
+  before_action :find_book, only: [:new, :create]
+  before_action :authenticate_customer!
+  
+  def new
+    @rating = Rating.new
   end
 
-  def create
-    rating = current_user.ratings.build(rating_params)
-    rating.book = @book
-    if rating.save
-      redirect_to @book, notice: (I18n.t"ratings.sent_to_review")
-    else
-      redirect_to @book # todo: msg
+  def create 
+    @rating = current_customer.ratings.build(rating_params)
+    if @rating.save
+      redirect_to @book, notice: "Thank you for review! It will appear on this page after moderation."
+    else    
+      render 'new'
     end
-
   end
 
   private
   def rating_params
-    params.require(:rating).permit(:review, :number)
+    params.require(:rating).permit(:review, :rating_number, :book_id)
+  end
+
+  def find_book
+   @book = Book.find(params[:book_id])
   end
 end

@@ -1,9 +1,9 @@
-%p#notice= notice
-
-%p
-  %b Title:
-  = @category.title
-
-= link_to 'Edit', edit_category_path(@category)
-\|
-= link_to 'Back', categories_path
+.container-fluid
+  %ol.breadcrumb
+    %li= link_to 'Home', root_path
+    %li= link_to 'Shop', books_path
+    %li.active= @category.title
+  %h3= @category.title
+  .row
+    =render "books/books"
+    =render 'categories/categories'

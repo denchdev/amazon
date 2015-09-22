@@ -15,12 +15,14 @@
   
   .well
     .text-right
-      =link_to 'Leave a Review', '', class: 'btn btn-success'
-    %hr    
+      =link_to 'Leave a Review', new_book_rating_path(@book), class: 'btn btn-success'
+    %hr       
     -@book.ratings do |rating|
       .row
         =rating.title
         =rating.review
+
+    
         
       
 

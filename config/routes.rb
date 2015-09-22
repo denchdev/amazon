@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :addresses
   resources :countries  
   resources :books, only: [:index, :show] do
-    resources :ratings, only: :create
+    resources :ratings, only: [:new, :create]
   end  
   resources :authors
   resources :categories  

@@ -1,4 +1,6 @@
 class Rating < ActiveRecord::Base
+  include AASM
+  
   belongs_to :book
   belongs_to :customer
 
@@ -28,11 +30,11 @@ class Rating < ActiveRecord::Base
     state :rejected    
 
     event :approve do
-      transition :pending => :approved
+      transitions :pending => :approved
     end
 
     event :reject do
-      transition [:pending, :approved] => :rejected
+      transitions [:pending, :approved] => :rejected
     end
   end
 
