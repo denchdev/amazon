@@ -88,6 +88,9 @@ GEM
     country_select (2.3.0)
       countries (~> 1.0.0)
       sort_alphabetical (~> 1.0)
+    credit_card_validations (3.0.0)
+      activemodel (>= 3, < 5)
+      activesupport (>= 3, < 5)
     currencies (0.4.2)
     database_cleaner (1.4.1)
     debug_inspector (0.0.2)
@@ -432,6 +435,7 @@ DEPENDENCIES
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
   country_select
+  credit_card_validations
   database_cleaner
   devise
   factory_girl_rails

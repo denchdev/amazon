@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :delivery do
-    name "MyString"
-price 1.5
+    sequence(:name) { |n| "Delivery#{Faker::Lorem.word}#{n}" }
+    price { Faker::Commerce.price }
   end
-
 end

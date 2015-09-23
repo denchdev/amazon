@@ -1,7 +1,10 @@
 FactoryGirl.define do
   factory :rating do
-    rewiev "MyString"
-rating 1
+    review { Faker::Lorem.sentence }
+    number { Faker::Number.between(1, 10) }
+    book
+    user
+    state "pending"
   end
 
 end

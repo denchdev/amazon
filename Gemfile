@@ -31,6 +31,7 @@ gem 'owlcarousel-rails'
 gem 'wicked'
 gem 'simple_form'
 gem 'country_select'
+gem 'credit_card_validations'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
