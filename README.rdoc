@@ -1,6 +1,7 @@
 == README
 
 [![Code Climate](https://codeclimate.com/repos/560322d0e30ba0013300061d/badges/dd25b3f735bdca11fab9/gpa.svg)](https://codeclimate.com/repos/560322d0e30ba0013300061d/feed)
+<a href="https://codeclimate.com/repos/560322d0e30ba0013300061d/feed"><img src="https://codeclimate.com/repos/560322d0e30ba0013300061d/badges/dd25b3f735bdca11fab9/gpa.svg" /></a>
 
 
 This README would normally document whatever steps are necessary to get the
