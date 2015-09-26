@@ -5,11 +5,10 @@ class Customer < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
   has_many :orders, dependent: :destroy
-  has_many :ratings, dependent: :destroy    
-  has_many :orders, dependent: :destroy 
+  has_many :ratings, dependent: :destroy
   belongs_to :billing_address,  class_name: "Address"
   belongs_to :shipping_address, class_name: "Address"
-  has_many :order_items, dependent: :destroy  
+  #has_many :order_items, dependent: :destroy  
   
   validates_presence_of :firstname, :lastname, :email, :password
   validates :email, uniqueness: { case_sensitive: false }, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }

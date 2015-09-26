@@ -1,11 +1,10 @@
 FactoryGirl.define do
   factory :customer do
-    email       { Faker::Internet.email }
-    first_name  { Faker::Name.first_name }
-    last_name   { Faker::Name.last_name }
-    password    "password"
-    avatar      { Faker::Avatar.image }
-
+    email      { Faker::Internet.email }
+    firstname  { Faker::Name.first_name }
+    lastname   { Faker::Name.last_name }
+    password   { Faker::Internet.password(8, 20) }  
+    
     factory :facebook_user do
       provider  "facebook"
       uid       { Faker::Number.number(15) }

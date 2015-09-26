@@ -4,7 +4,7 @@ class Rating < ActiveRecord::Base
   belongs_to :book
   belongs_to :customer
 
-  validates_inclusion_of :rating, :in => 0..100
+  validates_inclusion_of :rating, :in => 0..10
   
   belongs_to :customer
   belongs_to :book
