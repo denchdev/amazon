@@ -16,5 +16,7 @@ class Book < ActiveRecord::Base
       return desc
     end    
   end
+
+  
   
 end

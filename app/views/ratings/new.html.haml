@@ -17,8 +17,8 @@
           =f.radio_button :rating, i
           %i
     .form-group 
-      =f.label :rewiev, "Text:", class: "control-label"
-      =f.text_area :rewiev, class: "form-control"
+      =f.label :review, "Text:", class: "control-label"
+      =f.text_area :review, class: "form-control"
       =f.hidden_field :book_id, :value => @book.id
     .form-group
       =f.submit 'Add review', class: "btn btn-primary"
