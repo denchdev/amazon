@@ -20,5 +20,7 @@ Rails.application.routes.draw do
   resources :authors
   resources :categories  
   resources :customers
+  put 'setting/:resources', to: 'settings#update', as: 'settings'
+  get 'settings', to: 'settings#edit', as: 'setting'
   
 end

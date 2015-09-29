@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926221959) do
+ActiveRecord::Schema.define(version: 20150929200202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,14 +21,13 @@ ActiveRecord::Schema.define(version: 20150926221959) do
     t.integer  "zipcode"
     t.string   "city"
     t.string   "phone"
-    t.integer  "country_id"
     t.integer  "order_id"
     t.integer  "customer_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "country"
   end
 
-  add_index "addresses", ["country_id"], name: "index_addresses_on_country_id", using: :btree
   add_index "addresses", ["customer_id"], name: "index_addresses_on_customer_id", using: :btree
   add_index "addresses", ["order_id"], name: "index_addresses_on_order_id", using: :btree
 
@@ -136,6 +135,18 @@ ActiveRecord::Schema.define(version: 20150926221959) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "line_items", force: :cascade do |t|
+    t.float    "price"
+    t.integer  "quantity"
+    t.integer  "order_id"
+    t.integer  "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "line_items", ["book_id"], name: "index_line_items_on_book_id", using: :btree
+  add_index "line_items", ["order_id"], name: "index_line_items_on_order_id", using: :btree
+
   create_table "order_items", force: :cascade do |t|
     t.float    "price"
     t.integer  "quantity"
@@ -180,11 +191,12 @@ ActiveRecord::Schema.define(version: 20150926221959) do
   add_index "ratings", ["book_id"], name: "index_ratings_on_book_id", using: :btree
   add_index "ratings", ["customer_id"], name: "index_ratings_on_customer_id", using: :btree
 
-  add_foreign_key "addresses", "countries"
   add_foreign_key "addresses", "customers"
   add_foreign_key "addresses", "orders"
   add_foreign_key "books", "authors"
   add_foreign_key "books", "categories"
+  add_foreign_key "line_items", "books"
+  add_foreign_key "line_items", "orders"
   add_foreign_key "order_items", "books"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "credit_cards"

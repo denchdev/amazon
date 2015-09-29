@@ -22,12 +22,4 @@ class Address < ActiveRecord::Base
     c = ISO3166::Country[country]
     c.translations[I18n.locale.to_s] || c.name
   end
-
-  def full_address
-    [address, city, zip_code, country.upcase].compact.join(', ')
-  end
-
-  def coords
-    Geocoder.coordinates(full_address)
-  end
 end

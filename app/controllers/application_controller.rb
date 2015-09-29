@@ -18,6 +18,8 @@ class ApplicationController < ActionController::Base
       if Order.where(id: cookies[:current_order]).any?
         Order.find(cookies[:current_order])
       end
-    end
+    else
+      Order.new
+    end    
   end
 end

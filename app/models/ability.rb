@@ -13,11 +13,12 @@ class Ability
       can :read, Rating, state: "approved" 
       can :read, Delivery
       can :read, Order, customer_id: customer.id
-      can :read, Order_item, customer_id: customer.id
+      can :read, Order_item, order_id: order.id
       unless user.is_a? Customer
         can [:read, :create], WishList, user_id: user.id
         can :create, Rating, user_id: user.id
         can :read, Address, user_id: user.id
       end
+    end
   end
 end
