@@ -18,25 +18,3 @@
                   = check_box_tag "use-billing-address", "", compare_address(@order, true, false), id: "use-billing-address"
                   = "use_billing_address" 
             = render partial: "addresses/address", object: f
-:javascript
-  var inputs = $("[type='tel']");
-  inputs.each(function(){
-    // Insert new line after label
-    var input = $(this);
-    var label = $("[for='" + input.attr("id") + "']");
-    $(label).after("<br />");
-    // Mark input as phone number
-    $(input).intlTelInput();
-  });
-
-  $("#use-billing-address").change(function() {
-      if(this.checked) {
-        $("#shipping-address").fadeOut();
-        $("#use_billing_address").val("yes");
-      }else{
-        $("#shipping-address").fadeIn();
-        $("#use_billing_address").val("no");
-      }
-  });
-
-

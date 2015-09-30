@@ -1,6 +1,9 @@
 class CategoriesController < ApplicationController
-  #load_and_authorize_resource
-
+  load_and_authorize_resource
+	
+  def index
+  end
+  
   def show 
     @categories = Category.all
     @category = Category.find(params[:id]) 
