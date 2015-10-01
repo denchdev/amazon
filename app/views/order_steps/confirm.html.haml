@@ -1,9 +1,70 @@
 .container-fluid
-  = render layout: 'form' do |f|
-    .col-md-10
-      %h2= t(:complete)
-      .row
-        .col-md-10
-          If you want save profile, sign up please
-       		
-          	
+  = form_tag wizard_path, method: :put do    
+    %h2= t(:confirm)
+    .row
+      .col-md-3
+        .panel.panel-success
+          .panel-heading
+            %h3.panel-title
+              %i.fa.fa-map-marker
+              =t ".shipping_address"
+              %small= link_to (t".edit"), wizard_path(:address)
+          .panel-body
+            %p= @order.shipping_address.city
+            %p= @order.shipping_address.zipcode
+            %p= @order.shipping_address.country
+            %p= @order.shipping_address.phone
+
+      .col-md-3
+        .panel.panel-success
+          .panel-heading
+            %h3.panel-title
+              %i.fa.fa-map-marker
+              =t ".billing_address"
+              %small= link_to (t".edit"), wizard_path(:address)
+          .panel-body
+            %p= @order.billing_address.city
+            %p= @order.billing_address.zipcode
+            %p= @order.billing_address.country
+            %p= @order.billing_address.phone
+
+      .col-md-3
+        .panel.panel-success
+          .panel-heading
+            %h3.panel-title
+              %i.fa.fa-truck
+              = t".delivery"
+              %small= link_to (t".edit"), wizard_path(:delivery)
+          .panel-body
+            %p= @order.delivery.name
+
+
+      .col-md-3
+        .panel.panel-success
+          .panel-heading
+            %h3.panel-title
+              %i.fa.fa-credit-card
+              =t ".credit_card"
+              %small= link_to (t".edit"), wizard_path(:payment)
+          .panel-body
+            %p= secure_credit_card_number(@order.credit_card.number)
+            %p= "#{@order.credit_card.expiration_month}/#{@order.credit_card.expiration_year}"
+
+
+    %table.table.table-stripped
+      %thead
+        %tr
+          %th=t".book"
+          %th=t".price"
+          %th=t".qty"
+          %th=t".total"
+      %tbody
+      - @order.order_items.each do |order_item|
+        %tr.cart_item
+          %td
+            = image_tag order_item.book.image.preview.url
+            = link_to order_item.book.title, order_item.book
+          %td= number_to_currency order_item.price
+          %td= order_item.quantity
+          %td= number_to_currency order_item.price
+        	

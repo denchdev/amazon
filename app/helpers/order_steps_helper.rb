@@ -8,12 +8,4 @@ module OrderStepsHelper
     end
     result
   end
-
-  def compare_address(order, positive, negative)
-    if order.billing_address.eq(order.shipping_address)
-      positive
-    else
-      negative
-    end
-  end
 end

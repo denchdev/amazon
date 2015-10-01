@@ -4,9 +4,10 @@
       %h2= t(:delivery)
       .row
         .col-md-10
-        - @delivery.each do |d|
-          = radio_button_tag(:delivery, d.id, @order.delivery == d, options={onclick: "calculate_order_price(#{d.price});"})
-          = "#{d.name} + #{number_to_currency d.price}"	    
+          - @delivery.each do |d|
+            = radio_button_tag(:delivery, d.id, @order.delivery == d, options={onclick: "calculate_order_price(#{d.price});"})
+            = "#{d.name} + #{number_to_currency d.price}"	   
+            %br 
 	  
     :javascript
       function calculate_order_price(shipping_price){

@@ -23,10 +23,8 @@ class OrderStepsController < ApplicationController
         return render_wizard unless update_credit_card
       when :confirm
         check_order
-        @order.checkout!
-        return redirect_to order_path(@order)
-      when :complete
-        
+        @order.checkout 
+        @order = nil
     end
     render_wizard @order
   end
@@ -93,12 +91,7 @@ private
     is_shipping_updated && is_billing_updated
   end
 
-  def update_order
-    params[:items].each do |item|
-      order_item = @order.order_items.find(item[:id])
-      order_item.update(quantity: item[:quantity])
-    end
-  end
+private
 
   def credit_card_params
     params.require(:credit_card).permit(:number, :CVV, :expiration_month, :expiration_year, :firstname, :lastname)

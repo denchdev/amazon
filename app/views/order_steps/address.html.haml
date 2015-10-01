@@ -1,20 +1,22 @@
 .container-fluid
-  = render layout: 'form' do |f|
+  = render layout: 'form' do |f|    
     .col-md-6
       %h2= t(:bill_ad)
-      .row
+      .row        
         .col-md-10          
           = simple_fields_for :billing_address, @order.billing_address do |f|
-            = render partial: "addresses/address", object: f          
+            .billing-address
+              = render partial: "addresses/address", object: f          
     .col-md-6
       %h2= t(:ship_ad)
       .row
         .col-md-10
           = simple_fields_for :shipping_address, @order.shipping_address do |f|
-            .form-group
-              = hidden_field_tag :use_billing_address, compare_address(@order, "yes", "no")
+            .form-group              
               .checkbox
                 %label
-                  = check_box_tag "use-billing-address", "", compare_address(@order, true, false), id: "use-billing-address"
-                  = "use_billing_address" 
-            = render partial: "addresses/address", object: f
+                  = check_box_tag "use-billing-address", id: "use-billing-address"
+                  = "Use billing as shipping " 
+                  = hidden_field_tag :use_billing_address
+            .shipping-address
+              = render partial: "addresses/address", object: f

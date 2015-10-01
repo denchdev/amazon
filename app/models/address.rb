@@ -1,5 +1,4 @@
-class Address < ActiveRecord::Base
-  belongs_to :country
+class Address < ActiveRecord::Base  
   belongs_to :order
   belongs_to :customer
 
